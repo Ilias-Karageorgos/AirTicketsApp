@@ -23,31 +23,40 @@ namespace AirTicketsApp
 
         static void Start()
         {
-            WelcomeAndPrintOptions();
+            Welcoming();
+
+            PrintOptions();
 
             string country = GetCountry();
 
             string name = GetName();
 
-            
+            string ticketType = GetTicketType();
+
+            Console.WriteLine($" TICKET DETAILS \n Name:{name} \n Destrination:{country} \n Ticket Type: {ticketType}");
 
 
         }
 
-        static void  WelcomeAndPrintOptions()
+        static void Welcoming()
         {
             Console.WriteLine("Welcome to our website!");
+        }
+
+        static void PrintOptions()
+        {
+            
 
             Console.WriteLine($"Please choose your destination");
 
-            List    <string> countries = new List<string> { "Italy", "Spain", "Portugal", "Greece" }; ;
+            List<string> countries = new List<string> { "Italy", "Spain", "Portugal", "Greece" }; ;
 
 
             for (int i = 0; i < countries.Count; i++)
             {
-                Console.WriteLine($"{i+1} for {countries[i]}");
+                Console.WriteLine($"{i + 1} for {countries[i]}");
             }
-            
+
 
         }
 
@@ -67,13 +76,35 @@ namespace AirTicketsApp
                     case "4": return "Greece";
 
 
-                    default: Console.WriteLine("Please Choose between 1 and 4"); break;
+                    default: Console.WriteLine("Options are between 1 and 4"); PrintOptions(); ; break;
                 }
 
-            } while (countryCode != "1" && countryCode != "2" && countryCode !="3" && countryCode !="4");
+            } while (countryCode != "1" && countryCode != "2" && countryCode != "3" && countryCode != "4");
 
             return "";
 
+        }
+
+        static string GetTicketType()
+        {
+            Console.WriteLine("Please select \n 1 for one way ticket \n 2 for ticket including return");
+
+            string ticketType;
+
+            do
+            {
+
+                ticketType = Console.ReadLine();
+
+                switch (ticketType)
+                {
+                    case "1": return "One way ticket";
+                    case "2": return "Ticket with return";
+
+                    default: Console.WriteLine("Please select \n 1 for one way ticket \n 2 for ticket including return") ; break;
+                }
+            } while (ticketType != "1" && ticketType !="2");
+            return "";
         }
 
         static string GetName()
@@ -82,8 +113,12 @@ namespace AirTicketsApp
 
             string nameGiven = Console.ReadLine();
 
-           return nameGiven;
+            return nameGiven;
 
         }
+
+
+
+
     }
 }
